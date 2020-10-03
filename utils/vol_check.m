@@ -14,14 +14,14 @@ function [vmat,fh] = vol_check(volume)
 
 if ischar(volume) && exist(volume,'file')
   % is spm on the path?
-  if ~exist('spm_vol','func')
+  if ~exist('spm_vol','file')
     error('SPM not loaded onto the path .. please load SPM\n');
   end
 
   % load the file
   V = spm_vol(volume);
   Y = spm_read_vols(V);
-elseif isdouble(volume) && ndims(volume) == 4
+elseif isnumeric(volume) && ndims(volume) == 4
   % the input is the 4D data
   Y = volume;
 else
